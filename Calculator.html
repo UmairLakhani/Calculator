@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link href="Style\dist\css\bootstrap.min.css" rel="stylesheet">
+
+<link href="Style\dist\css\bootstrap.css" rel="stylesheet">
+
+<link href="css\simple-sidebar.css" rel="stylesheet">
+
+<link href="Style\dist\css\bootstrap.theme.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="Style\dist\font.css"/>
+
+
+    <style>
+
+
+
+
+        body {
+            background-image: url("img/images (3).jpg");
+        }
+        #main{
+            width: 320px;
+            height: 380px;
+            border-radius: 35px;
+            margin: auto;
+            margin-top: 100px;
+            background-color: black;
+            border: 5px solid snow;
+            box-shadow: 2px 2px 1px 1px gold;
+        }
+
+        .timebar {
+            border: 1px solid white;
+            text-align: center;
+            color: white;
+            display: block;
+            margin:10px 15% 0px 15%;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            box-shadow: inset 3px 3px 5px black;
+            background-color: #484848;
+
+        }
+
+        #days {
+            margin-top: 5px;
+            display: inline-block;
+            font-size: 10px;
+            float: left;
+            margin-left: 5px;
+            font-weight: bold;
+            color: ghostwhite;
+        }
+
+        .button input {
+
+            font-family: sans-serif;
+            color: #D1D1D1;
+            background-color: black;
+            border: none;
+            padding: 6px 10px 5px 10px;
+            font-size: 24px;
+            width: 70px;
+            border-radius: 10px;
+        }
+
+        .butt :hover {
+            background-color: bisque;
+            color: black;
+        }
+
+        .calbar {
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border: none;
+            background-color: #757;
+            box-shadow: inset 1px 1px 1px black;
+            height: 40px;
+            width: 100%;
+            text-align: right;
+            color: white;
+            font-weight: bolder;
+            font-family: Castellar;
+            font-size: 24px;
+        }
+
+        .title {
+            color: violet;
+            margin-top: 5px;
+            display: inline-block;
+            text-decoration: underline;
+            font-family: algerian;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        #time {
+            color: gold;
+            font-weight: bold;
+            font-family: algerian;
+        }
+
+        .on
+        {
+          float: right;
+          margin-right: 70px;
+        }
+
+        .off
+        {
+          visibility: hidden;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <div id="main"> 
+
+       <div class="timebar">
+           <span id="days"></span>
+           <br /> <span id="time">Lakhani</span>
+       <span>
+           <form><input type="text" class="calbar off" autofocus="autofocus" id="txt" maxlength="12" disabled="yes" />
+           </form>
+       </span>
+           </div>
+        <center><span class="title">Calculater</span></center>
+           <div class="button">
+               <center>
+                   <form class="butt">
+               <input type="button" value="off/on" class="on" />     
+               <input type="button" value="C" class="key clear-key" />  <br />   
+               <input type="button" value="+" class="key" " />
+               <input type="button" value="-" class="key" " />
+               <input type="button" value="*" class="key" />
+               <input type="button" value="/" class="key" /> <br />
+               <input type="button" value="7" class="key" />
+               <input type="button" value="8" class="key"/>
+               <input type="button" value="9" class="key"/>
+               <input type="button" value="0" class="key"/> <br />
+               <input type="button" value="4" class="key"/>
+               <input type="button" value="5" class="key"/>
+               <input type="button" value="6" class="key"/>
+               <input type="button" value="." class="key"/> <br />
+               <input type="button" value="1" class="key"/>
+               <input type="button" value="2" class="key"/>
+               <input type="button" value="3" class="key"/>
+               <input type="button" value="=" class="key equal-key" />
+                    </form>
+               </center>
+           </div>
+ 
+    </div>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="Style\dist\js\bootstrap.min.js"></script>
+<script src="Style\dist\js\jquery.js"></script>
+<script src="Style\dist\js\min.js"></script>
+<script>
+
+        var myVar=setInterval(function(){myTimer()},1000);
+
+        function myTimer() {
+            var d = new Date();
+            document.getElementById("time").innerHTML = d.toLocaleTimeString();
+        }
+        var d = new Date();
+        document.getElementById("days").innerHTML = d.toDateString();
+
+        var displayValue = '0';   
+    
+    $('#txt').val(displayValue);
+ 
+    $('.key').each(function(index, key){       
+        $(this).click(function(e){
+            if(displayValue == '0') displayValue = '';
+            if($(this).val() == 'C')
+            {
+                displayValue = '0';
+                $('#txt').val(displayValue);
+            }
+            else if($(this).val() == '=')
+            {
+                try
+                {
+                    displayValue = eval(displayValue);
+                    $('#txt').val(displayValue);
+                    displayValue = '0';
+                }
+                catch (e)
+                {
+                    displayValue = '0';
+                    $('#txt').val('ERROR');
+                }               
+            }
+            else
+            {
+                displayValue += $(this).val();
+                $('#txt').val(displayValue);
+            }
+            e.preventDefault()
+        })
+    })
+
+
+
+
+
+        $(".on").click(function(){
+          $("#txt").toggleClass('off');
+        });
+
+    </script>
+
+
+
+</body>
+</html>
